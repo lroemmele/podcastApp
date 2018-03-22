@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Search } from '../presentation';
 import { APIClient } from '../../utils';
+import actions from '../../actions';
 
 class Playlist extends Component {
      searchPodcasts(event){
@@ -33,4 +34,17 @@ class Playlist extends Component {
           )
      }
 }
-export default Playlist;
+
+const stateToProps = (state) =>{
+     return {
+          podcasts: state.podcast
+     }
+};
+
+const dispatchToProps = (dispatch) =>{
+     return {
+          podcastsReceived: (podcasts) => dispatch(actions.podcastsReceived(podcasts))
+     }
+};
+
+export default connect(stateToProps, dispatchToProps) (Playlist);
