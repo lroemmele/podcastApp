@@ -18658,7 +18658,7 @@ exports.Playlist = _Playlist2.default;
 
 
 Object.defineProperty(exports, "__esModule", {
-  value: true
+     value: true
 });
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
@@ -18666,6 +18666,12 @@ var _createClass = function () { function defineProperties(target, props) { for 
 var _react = __webpack_require__(1);
 
 var _react2 = _interopRequireDefault(_react);
+
+var _reactRedux = __webpack_require__(60);
+
+var _actions = __webpack_require__(94);
+
+var _actions2 = _interopRequireDefault(_actions);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -18676,136 +18682,61 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
 var Podcasts = function (_Component) {
-  _inherits(Podcasts, _Component);
+     _inherits(Podcasts, _Component);
 
-  function Podcasts() {
-    _classCallCheck(this, Podcasts);
+     function Podcasts() {
+          _classCallCheck(this, Podcasts);
 
-    return _possibleConstructorReturn(this, (Podcasts.__proto__ || Object.getPrototypeOf(Podcasts)).apply(this, arguments));
-  }
+          return _possibleConstructorReturn(this, (Podcasts.__proto__ || Object.getPrototypeOf(Podcasts)).apply(this, arguments));
+     }
 
-  _createClass(Podcasts, [{
-    key: "render",
-    value: function render() {
-      return _react2.default.createElement(
-        "div",
-        null,
-        _react2.default.createElement(
-          "div",
-          { className: "shop-banner animated fadeinup delay-2" },
-          _react2.default.createElement(
-            "a",
-            { href: "category.html" },
-            _react2.default.createElement("img", { src: "img/banner2.jpg", alt: "" }),
-            _react2.default.createElement(
-              "div",
-              { className: "opacity-overlay valign-wrapper" },
-              _react2.default.createElement(
-                "div",
-                { className: "valign center width-100" },
-                _react2.default.createElement(
-                  "h3",
-                  { className: "white-text" },
-                  "Accessories"
-                ),
-                _react2.default.createElement(
-                  "p",
-                  { className: "white-text" },
-                  "Watches 2016"
-                )
-              )
-            )
-          )
-        ),
-        _react2.default.createElement(
-          "div",
-          { className: "shop-banner animated fadeinup delay-2" },
-          _react2.default.createElement(
-            "a",
-            { href: "category.html" },
-            _react2.default.createElement("img", { src: "img/banner2.jpg", alt: "" }),
-            _react2.default.createElement(
-              "div",
-              { className: "opacity-overlay valign-wrapper" },
-              _react2.default.createElement(
-                "div",
-                { className: "valign center width-100" },
-                _react2.default.createElement(
-                  "h3",
-                  { className: "white-text" },
-                  "Accessories"
-                ),
-                _react2.default.createElement(
-                  "p",
-                  { className: "white-text" },
-                  "Watches 2016"
-                )
-              )
-            )
-          )
-        ),
-        _react2.default.createElement(
-          "div",
-          { className: "shop-banner animated fadeinup delay-2" },
-          _react2.default.createElement(
-            "a",
-            { href: "category.html" },
-            _react2.default.createElement("img", { src: "img/banner2.jpg", alt: "" }),
-            _react2.default.createElement(
-              "div",
-              { className: "opacity-overlay valign-wrapper" },
-              _react2.default.createElement(
-                "div",
-                { className: "valign center width-100" },
-                _react2.default.createElement(
-                  "h3",
-                  { className: "white-text" },
-                  "Accessories"
-                ),
-                _react2.default.createElement(
-                  "p",
-                  { className: "white-text" },
-                  "Watches 2016"
-                )
-              )
-            )
-          )
-        ),
-        _react2.default.createElement(
-          "div",
-          { className: "shop-banner animated fadeinup delay-2" },
-          _react2.default.createElement(
-            "a",
-            { href: "category.html" },
-            _react2.default.createElement("img", { src: "img/banner2.jpg", alt: "" }),
-            _react2.default.createElement(
-              "div",
-              { className: "opacity-overlay valign-wrapper" },
-              _react2.default.createElement(
-                "div",
-                { className: "valign center width-100" },
-                _react2.default.createElement(
-                  "h3",
-                  { className: "white-text" },
-                  "Accessories"
-                ),
-                _react2.default.createElement(
-                  "p",
-                  { className: "white-text" },
-                  "Watches 2016"
-                )
-              )
-            )
-          )
-        )
-      );
-    }
-  }]);
+     _createClass(Podcasts, [{
+          key: 'render',
+          value: function render() {
 
-  return Podcasts;
+               var list = this.props.podcasts.all || [];
+
+               return _react2.default.createElement(
+                    'div',
+                    null,
+                    list.map(function (podcast, i) {
+                         return _react2.default.createElement(
+                              'div',
+                              { key: i, className: 'shop-banner animated fadeinup delay-2' },
+                              _react2.default.createElement(
+                                   'a',
+                                   { href: '#' },
+                                   _react2.default.createElement('img', { src: podcast.artworkUrl600, alt: '' }),
+                                   _react2.default.createElement(
+                                        'div',
+                                        { className: 'opacity-overlay valign-wrapper' },
+                                        _react2.default.createElement(
+                                             'div',
+                                             { className: 'valign center width-100' },
+                                             _react2.default.createElement(
+                                                  'p',
+                                                  { className: 'white-text' },
+                                                  podcast.collectionName
+                                             )
+                                        )
+                                   )
+                              )
+                         );
+                    })
+               );
+          }
+     }]);
+
+     return Podcasts;
 }(_react.Component);
 
-exports.default = Podcasts;
+var stateToProps = function stateToProps(state) {
+     return {
+          podcasts: state.podcast
+     };
+};
+
+exports.default = (0, _reactRedux.connect)(stateToProps)(Podcasts);
 
 /***/ }),
 /* 37 */
@@ -18827,6 +18758,8 @@ var _react2 = _interopRequireDefault(_react);
 var _presentation = __webpack_require__(15);
 
 var _utils = __webpack_require__(38);
+
+var _reactRedux = __webpack_require__(60);
 
 var _actions = __webpack_require__(94);
 
@@ -18852,6 +18785,8 @@ var Playlist = function (_Component) {
      _createClass(Playlist, [{
           key: 'searchPodcasts',
           value: function searchPodcasts(event) {
+               var _this2 = this;
+
                if (event.keyCode != 13) {
                     return;
                }
@@ -18859,7 +18794,8 @@ var Playlist = function (_Component) {
                var endpoint = '/search/' + event.target.value;
 
                _utils.APIClient.get(endpoint, null).then(function (response) {
-                    console.log(JSON.stringify(response));
+                    //console.log(JSON.stringify(response))
+                    _this2.props.podcastsReceived(response.results);
                }).catch(function (err) {
                     console.log('ERROR' + JSON.stringigy(response));
                });
@@ -18901,7 +18837,7 @@ var dispatchToProps = function dispatchToProps(dispatch) {
      };
 };
 
-exports.default = connect(stateToProps, dispatchToProps)(Playlist);
+exports.default = (0, _reactRedux.connect)(stateToProps, dispatchToProps)(Playlist);
 
 /***/ }),
 /* 38 */
@@ -26962,7 +26898,10 @@ var _constants2 = _interopRequireDefault(_constants);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var initialState = {};
+var initialState = {
+     all: null
+
+};
 
 exports.default = function () {
      var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : initialState;
@@ -26973,6 +26912,7 @@ exports.default = function () {
      switch (action.type) {
           case _constants2.default.PODCASTS_RECEIVED:
                console.log('PODCASTS_RECEIVED: ' + JSON.stringify(action.podcasts));
+               updated['all'] = action.podcasts;
 
                return updated;
 

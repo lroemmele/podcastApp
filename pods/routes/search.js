@@ -8,7 +8,6 @@ router.get('/:term', function(req, res, next) {
 
      var url = 'http://itunes.apple.com/search';
 
-//feath itunes api
      superagent
      .get(url)
      .query({media: 'podcast', term: term})

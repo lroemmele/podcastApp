@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Search } from '../presentation';
 import { APIClient } from '../../utils';
+import { connect } from 'react-redux';
 import actions from '../../actions';
 
 class Playlist extends Component {
@@ -14,7 +15,8 @@ class Playlist extends Component {
           APIClient
           .get(endpoint, null)
           .then(response =>{
-               console.log(JSON.stringify(response))
+               //console.log(JSON.stringify(response))
+               this.props.podcastsReceived(response.results);
           })
           .catch(err =>{
                console.log('ERROR' + JSON.stringigy(response))
