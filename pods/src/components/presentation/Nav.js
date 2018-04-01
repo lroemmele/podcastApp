@@ -9,7 +9,7 @@ export default (props)=> {
                          <span></span>
                          <span></span>
                          <span></span>
-                         </div>
+                    </div>
                </div>
 
                <nav id="menu" className="menu">
