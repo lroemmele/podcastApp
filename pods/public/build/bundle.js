@@ -1990,7 +1990,15 @@ exports.default = {
                type: _constants2.default.PODCASTS_RECEIVED,
                podcasts: podcasts
           };
+     },
+
+     podcastSelected: function podcastSelected(podcast) {
+          return {
+               type: _constants2.default.PODCASTS_SELECTED,
+               podcast: podcast
+          };
      }
+
 };
 
 /***/ }),
@@ -2005,7 +2013,9 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.default = {
      SEARCH_PODCASTS: 'SEARCH_PODCASTS',
-     PODCASTS_RECEIVED: 'PODCASTS_RECEIVED'
+     PODCASTS_RECEIVED: 'PODCASTS_RECEIVED',
+     PODCASTS_SELECTED: 'PODCAST_SELECTED'
+
 };
 
 /***/ }),
@@ -19690,8 +19700,16 @@ var Podcasts = function (_Component) {
   }
 
   _createClass(Podcasts, [{
+    key: 'selectPodcast',
+    value: function selectPodcast(podcast, event) {
+      //console.log('select podcast: '+JSON.stringify(podcast));
+      this.props.podcastSelected(podcast);
+    }
+  }, {
     key: 'render',
     value: function render() {
+      var _this2 = this;
+
       var list = this.props.podcasts.all || [];
 
       return _react2.default.createElement(
@@ -19703,7 +19721,7 @@ var Podcasts = function (_Component) {
             { key: i, className: 'shop-banner animated fadeinup delay-2' },
             _react2.default.createElement(
               'a',
-              { href: '#' },
+              { onClick: _this2.selectPodcast.bind(_this2, podcast), href: '#' },
               _react2.default.createElement('img', { src: podcast.artworkUrl600, alt: '' }),
               _react2.default.createElement(
                 'div',
@@ -19734,7 +19752,15 @@ var stateToProps = function stateToProps(state) {
   };
 };
 
-exports.default = (0, _reactRedux.connect)(stateToProps)(Podcasts);
+var dispatchToProps = function dispatchToProps(dipatch) {
+  return {
+    podcastSelected: function podcastSelected(podcast) {
+      return dipatch(_actions2.default.podcastSelected(podcast));
+    }
+  };
+};
+
+exports.default = (0, _reactRedux.connect)(stateToProps, dispatchToProps)(Podcasts);
 
 /***/ }),
 /* 52 */
@@ -21636,7 +21662,7 @@ function verifySubselectors(mapStateToProps, mapDispatchToProps, mergeProps, dis
 
 
 Object.defineProperty(exports, "__esModule", {
-	value: true
+  value: true
 });
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
@@ -21668,109 +21694,124 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
 var Playlist = function (_Component) {
-	_inherits(Playlist, _Component);
+  _inherits(Playlist, _Component);
 
-	function Playlist() {
-		_classCallCheck(this, Playlist);
+  function Playlist() {
+    _classCallCheck(this, Playlist);
 
-		return _possibleConstructorReturn(this, (Playlist.__proto__ || Object.getPrototypeOf(Playlist)).apply(this, arguments));
-	}
+    return _possibleConstructorReturn(this, (Playlist.__proto__ || Object.getPrototypeOf(Playlist)).apply(this, arguments));
+  }
 
-	_createClass(Playlist, [{
-		key: 'componentDidMount',
-		value: function componentDidMount() {
-			var ap1 = new _aplayer2.default({
-				element: document.getElementById('player1'),
-				narrow: false,
-				autoplay: true,
-				showlrc: false,
-				mutex: true,
-				theme: '#e6d0b2',
-				preload: 'metadata',
-				mode: 'circulation',
-				music: [{
-					title: 'Preparation',
-					author: 'Hans Zimmer/Richard Harvey',
-					url: 'http://devtest.qiniudn.com/Preparation.mp3',
-					pic: 'http://devtest.qiniudn.com/Preparation.jpg'
-				}]
+  _createClass(Playlist, [{
+    key: 'componentDidMount',
+    value: function componentDidMount() {
+      var ap1 = new _aplayer2.default({
+        element: document.getElementById('player1'),
+        narrow: false,
+        autoplay: true,
+        showlrc: false,
+        mutex: true,
+        theme: '#e6d0b2',
+        preload: 'metadata',
+        mode: 'circulation',
+        music: [{
+          title: 'Preparation',
+          author: 'Hans Zimmer/Richard Harvey',
+          url: 'http://devtest.qiniudn.com/Preparation.mp3',
+          pic: 'http://devtest.qiniudn.com/Preparation.jpg'
+        }]
 
-			});
+      });
 
-			// ap1.on('play', function () {
-			//     console.log('play');
-			// });
-			// ap1.on('play', function () {
-			//     console.log('play play');
-			// });
-			// ap1.on('pause', function () {
-			//     console.log('pause');
-			// });
-			// ap1.on('canplay', function () {
-			//     console.log('canplay');
-			// });
-			// ap1.on('playing', function () {
-			//     console.log('playing');
-			// });
-			// ap1.on('ended', function () {
-			//     console.log('ended');
-			// });
-			// ap1.on('error', function () {
-			//     console.log('error');
-			// });
-		}
-	}, {
-		key: 'searchPodcasts',
-		value: function searchPodcasts(event) {
-			var _this2 = this;
+      // ap1.on('play', function () {
+      //     console.log('play');
+      // });
+      // ap1.on('play', function () {
+      //     console.log('play play');
+      // });
+      // ap1.on('pause', function () {
+      //     console.log('pause');
+      // });
+      // ap1.on('canplay', function () {
+      //     console.log('canplay');
+      // });
+      // ap1.on('playing', function () {
+      //     console.log('playing');
+      // });
+      // ap1.on('ended', function () {
+      //     console.log('ended');
+      // });
+      // ap1.on('error', function () {
+      //     console.log('error');
+      // });
+    }
+  }, {
+    key: 'searchPodcasts',
+    value: function searchPodcasts(event) {
+      var _this2 = this;
 
-			if (event.keyCode != 13) return;
+      if (event.keyCode != 13) return;
 
-			console.log('searchPodcasts: ' + event.target.value);
-			var endpoint = '/search/' + event.target.value;
+      console.log('searchPodcasts: ' + event.target.value);
+      var endpoint = '/search/' + event.target.value;
 
-			_utils.APIClient.get(endpoint, null).then(function (response) {
-				//			console.log(JSON.stringify(response))
-				_this2.props.podcastsReceived(response.results);
-			}).catch(function (err) {
-				console.log('ERROR: ' + JSON.stringify(response));
-			});
-		}
-	}, {
-		key: 'render',
-		value: function render() {
-			return _react2.default.createElement(
-				'div',
-				null,
-				_react2.default.createElement(
-					'div',
-					{ style: { paddingTop: 64 }, className: 'hero-header bg-shop animated fadeindown' },
-					_react2.default.createElement(
-						'div',
-						{ className: 'p-20 animated fadeinup delay-1' },
-						_react2.default.createElement('div', { style: { background: '#fff' }, id: 'player1', className: 'aplayer' })
-					)
-				),
-				_react2.default.createElement(_presentation.Search, { onSearch: this.searchPodcasts.bind(this) })
-			);
-		}
-	}]);
+      _utils.APIClient.get(endpoint, null).then(function (response) {
+        //			console.log(JSON.stringify(response))
+        _this2.props.podcastsReceived(response.results);
+      }).catch(function (err) {
+        console.log('ERROR: ' + JSON.stringify(response));
+      });
+    }
+  }, {
+    key: 'componentDidUpdate',
+    value: function componentDidUpdate() {
+      console.log('componentDidUpdate' + JSON.stringify(this.props.podcasts.selected));
+      if (this.props.podcasts.selected == null) {
+        return;
+      }
 
-	return Playlist;
+      var feedUrl = this.props.podcasts.selected['feedUrl'];
+
+      if (feedUrl == null) {
+        return;
+      }
+      console.log('FEEDURL' + feedUrl);
+    }
+  }, {
+    key: 'render',
+    value: function render() {
+      return _react2.default.createElement(
+        'div',
+        null,
+        _react2.default.createElement(
+          'div',
+          { style: { paddingTop: 64 }, className: 'hero-header bg-shop animated fadeindown' },
+          _react2.default.createElement(
+            'div',
+            { className: 'p-20 animated fadeinup delay-1' },
+            _react2.default.createElement('div', { style: { background: '#fff' }, id: 'player1', className: 'aplayer' })
+          )
+        ),
+        _react2.default.createElement(_presentation.Search, { onSearch: this.searchPodcasts.bind(this) })
+      );
+    }
+  }]);
+
+  return Playlist;
 }(_react.Component);
 
 var stateToProps = function stateToProps(state) {
-	return {
-		podcasts: state.podcast
-	};
+  return {
+    podcasts: state.podcast
+  };
 };
 
 var dispatchToProps = function dispatchToProps(dispatch) {
-	return {
-		podcastsReceived: function podcastsReceived(podcasts) {
-			return dispatch(_actions2.default.podcastsReceived(podcasts));
-		}
-	};
+  return {
+    podcastsReceived: function podcastsReceived(podcasts) {
+      return dispatch(_actions2.default.podcastsReceived(podcasts));
+    }
+  };
 };
 
 exports.default = (0, _reactRedux.connect)(stateToProps, dispatchToProps)(Playlist);
@@ -29872,7 +29913,8 @@ var _constants2 = _interopRequireDefault(_constants);
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var initialState = {
-     all: null
+     all: null,
+     selected: null
 
 };
 
@@ -29884,8 +29926,19 @@ exports.default = function () {
 
      switch (action.type) {
           case _constants2.default.PODCASTS_RECEIVED:
-               console.log('PODCASTS_RECEIVED: ' + JSON.stringify(action.podcasts));
+               //     console.log('PODCASTS_RECEIVED: '+JSON.stringify(action.podcasts))
                updated['all'] = action.podcasts;
+
+               return updated;
+
+          case _constants2.default.PODCASTS_SELECTED:
+               //     console.log('PODCASTS_SELECTED: '+JSON.stringify(action.podcast))
+               if (updated.selected != null) {
+                    if (updated.selected.collectionId == action.podcast.collectionId) {
+                         return state;
+                    }
+               }
+               updated['selected'] = action.podcast;
 
                return updated;
 

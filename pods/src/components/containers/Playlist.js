@@ -23,7 +23,7 @@ class Playlist extends Component {
 	                author: 'Hans Zimmer/Richard Harvey',
 	                url: 'http://devtest.qiniudn.com/Preparation.mp3',
 	                pic: 'http://devtest.qiniudn.com/Preparation.jpg'
-	            }
+                }
             ]
 
         })
@@ -71,6 +71,21 @@ class Playlist extends Component {
 
 		})
 	}
+
+     componentDidUpdate(){
+          console.log('componentDidUpdate' +JSON.stringify(this.props.podcasts.selected));
+          if(this.props.podcasts.selected == null){
+               return
+          }
+
+          const feedUrl = this.props.podcasts.selected['feedUrl'];
+
+          if (feedUrl == null){
+               return
+          }
+          console.log('FEEDURL' +feedUrl);
+
+     }
 
 	render(){
 		return (
